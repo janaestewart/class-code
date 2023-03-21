@@ -8,8 +8,43 @@
     <title>Menu</title>
 </head>
 <body>
-    <div id="buttons-container"></div>
-    <div id="meals-container"></div>
+    <header>
+        <div id="icon-container">
+            <p id="menu-icon">&#x2630;</p>
+        </div>
+        <div class="buttons-container"></div>
+    </header>
+
+    <main>
+        <div id="meals-container"></div>
+        <form action="" id="add-meal-form">
+            <h2>Add a new meal</h2>
+            
+            <div class="input-container">
+                <label for="name">Name:</label>
+                <input type="text" name="name" placeholder="Enter meal name" required>
+            </div>
+
+            <div class="input-container">
+                <label for="imageUrl">Image URL</label>
+                <input type="text" name="imageUrl" placeholder="Enter imageUrl" required>
+            </div>
+
+            <div class="input-container">
+                <label for="category">Category</label>
+                <select name="" id="form-select">
+                    <option value="">Select a category</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        
+    </main>
+    
+    <footer>
+        <button class="theme-btn">Dark Mode</button>
+    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html> 

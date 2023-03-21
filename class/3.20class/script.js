@@ -311,106 +311,62 @@ const meals = [
       imageUrl: "https://www.themealdb.com/images/media/meals/w8umt11583268117.jpg",
       id: "53000"
     }
-]
+  ]
 
-const displayMenu = (list) => {
-    const mealsContainer = document.getElementById("meals-container")
-    const allMeals = list.map((item) => {
-        return `<div class="meal">
+//A function that will take a list as a parameter and map each item out to a meal <div>
+const displayMenu=(list)=>{
+  const mealContainer = document.getElementById("meals-container")  
+  const allMeals= list.map(item=>{
+  return `<div class="meal">
             <img src=${item.imageUrl} alt=${item.name} class="meal-image" />
             <div class="meal-info">
-                <p>${item.name}</p>
-                <p class="item-category">${item.category}</p>
+              <p>${item.name}</p>
+              <p class="item-category">${item.category}</p>
             </div>
-        </div>`
-    }).join("");
-
-    // console.log(allMeals)
-    mealsContainer.innerHTML = allMeals;
-}
-
-
-const displayButtons = () => {
-    const btnContainer = document.querySelector(".buttons-container")
-    const categories = meals.reduce((acc, item) => {
-        if(!acc.includes(item.category)){
-            acc.push(item.category);
-        }
-        return acc;
-    }, ["All"])
-
-    const categoryBtns = categories.map(category => {
-        return `<button onclick="filterMenu(event)" type="button" class="filter-btn" id=${category}>${category}</button>`
-    }).join("")
-
-    btnContainer.innerHTML = categoryBtns;
-}
-
-//these are tje functions that should execute when the window loads
-window.onload = function(){
-    displayMenu(meals)
-    displayButtons()
-}
-
-
-const filterMenu = (e) => {
-    // console.log(e)
-    const category = e.currentTarget.id
-    // console.log(category)
-    const menuCategory = meals.filter(menuItem => {
-        if(menuItem.category === category){
-            return menuItem;
-        } 
+          </div>`;
     })
-    
-    if(category === "All"){
-        displayMenu(meals)
-    } else{
-        displayMenu(menuCategory)
-    }
+    // console.log(allMeals) <-- Shows all of the new meal divs
+    // console.log(allMeals.join("")) <-- Show all of the new meal divs joined into a string
+   mealContainer.innerHTML=allMeals.join("");
 }
 
-// hamburger icon
-
-let menuIcon = document.querySelector("#menu-icon")
-
-
-
-const openMenu = () => {
+const displayButtons=() =>{
   const btnContainer = document.querySelector(".buttons-container");
-  btnContainer.classList.toggle("mobile-menu")
-  console.log(btnContainer)
-  // alert("whats up")
-  // console.log("whats up")
-} 
+  //Create array that holds all of our categories
+  const categories = meals.reduce((acc, item)=> {
+      if (!acc.includes(item.category)) {
+        acc.push(item.category);
+      }
+      return acc;
+    },["All"])
 
-menuIcon.onclick = openMenu;
+  //Convert array to buttons
+  const categoryBtns = categories.map(category=>{
+      return `<button onclick="filterMenu(event)" type="button" class="filter-btn" id=${category}>
+          ${category}
+        </button>`;
+    }).join("")
+  btnContainer.innerHTML = categoryBtns;
+}
 
 
-// theme toggle
+window.onload = function() {
+  displayMenu(meals);
+  displayButtons();
+};
 
-const themeButton = document.querySelector(".theme-btn") 
 
-const toggleTheme = () => {
-  // alert("Test")
-  const body = document.querySelector("body")
-  const labels = document.querySelector("label")
-
-  if(body.style.backgroundColor === "black"){
-    body.style.backgroundColor = "white";
-    themButton.innerHTML = "Dark Mode"
-    menuIcon.style.color = "rgb(53, 50, 50)"
-
-    for(let i = 0; i < labels.clientHeight; i++){
-      labels[i].style.color = "black"
+const filterMenu=(e)=>{
+    //console.log(e);
+    const category = e.currentTarget.id;
+    const menuCategory = meals.filter(menuItem=> {
+      if (menuItem.category == category) {
+        return menuItem;
+      }
+    });
+    if (category === "All") {
+      displayMenu(meals);
+    } else {
+      displayMenu(menuCategory);
     }
-  } else {
-    body.style.backgroundColor = "black";
-    themButton.innerHTML = "Light Mode"
-    menuIcon.style.color = "white"
-
-    for(let i = 0; i < labels.clientHeight; i++){
-      labels[i].style.color = "white"
-    }
-  }
 }

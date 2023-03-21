@@ -9,7 +9,19 @@
 a{
    text-decoration: none;
 }
-#buttons-container{
+
+#icon-container{
+    display: none;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.buttons-container{
     height:50px;
     display: flex;
     align-items: center;
@@ -24,12 +36,18 @@ a{
     border-radius: 8px; 
     cursor:pointer;
 }
+
+main{
+    display: flex;
+}
+
 #meals-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     justify-content: center;
     gap:20px;
     padding:0 20px;
+    width: 70%;
 }
 
 .meal-image{
@@ -47,4 +65,107 @@ a{
 .item-category{
     font-size: 12px;
     align-self:flex-end;
+}
+
+#add-meal-form{
+    width: 30%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#add-meal-form input, #add-meal-form select{
+    border-radius: 8px;
+    border: solid 1px grey;
+    padding: 8px 16px;
+    margin-top: 10px;
+}
+
+#add-meal-form button {
+    width: 50%;
+    background-color: rgb(53, 50, 50);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+footer{
+    padding: 20px;
+    background-color: rgb(53, 50, 50);
+    margin-top: 20px;
+    text-align: right;
+}
+
+.theme-btn{
+    background-color: rgb(166, 57, 57);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px){
+    .buttons-container{
+        display: none;
+    }
+
+    header{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    #icon-container{
+        display: block;
+        padding: 0 20px;
+    }
+
+    .mobile-menu{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+        height: 270px;
+        align-self: center;
+        width: 100%;
+       
+    }
+
+    .mobile-menu button{
+        width: 50%;
+        margin: 5px 0;
+    }
+
+    #menu-icon{
+        font-size: 36px;
+        color: rgb(53, 50, 50);
+        cursor: pointer;
+    }
+
+    main{
+        flex-direction: column-reverse;
+    }
+
+    #add-meal-form{
+        width: 100%;
+    }
+
+    #meals-container{
+        width: 100%;
+    }
+
+   
 }
