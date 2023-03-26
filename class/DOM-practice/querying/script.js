@@ -346,7 +346,7 @@ const displayButtons = () => {
     btnContainer.innerHTML = categoryBtns;
 }
 
-//these are tje functions that should execute when the window loads
+//these are the functions that should execute when the window loads
 window.onload = function(){
     displayMenu(meals)
     displayButtons()
