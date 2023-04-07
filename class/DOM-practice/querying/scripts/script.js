@@ -316,13 +316,13 @@ const meals = [
 const displayMenu = (list) => {
     const mealsContainer = document.getElementById("meals-container")
     const allMeals = list.map((item) => {
-        return `<div class="meal">
+        return `<a class="meal" href="details.html?id=${item.id}">
             <img src=${item.imageUrl} alt=${item.name} class="meal-image" />
             <div class="meal-info">
                 <p>${item.name}</p>
                 <p class="item-category">${item.category}</p>
             </div>
-        </div>`
+        </a>`
     }).join("");
 
     // console.log(allMeals)
@@ -339,11 +339,20 @@ const displayButtons = () => {
         return acc;
     }, ["All"])
 
+    // convert array to buttons
     const categoryBtns = categories.map(category => {
         return `<button onclick="filterMenu(event)" type="button" class="filter-btn" id=${category}>${category}</button>`
     }).join("")
 
     btnContainer.innerHTML = categoryBtns;
+
+    // selection options --> ["veg", "beef", "seafood", "chicken"]
+    const formSelect = document.querySelector("#form-select")
+    const selectOptions = categories.filter(item => item != "All").map(category => {
+      let newOption = document.createElement('option');
+      newOption.innerHTML = `<option value=${category}> ${category}</option>`;
+      formSelect.appendChild(newOption)
+    })
 }
 
 //these are the functions that should execute when the window loads
@@ -389,28 +398,64 @@ menuIcon.onclick = openMenu;
 
 // theme toggle
 
-const themeButton = document.querySelector(".theme-btn") 
-
-const toggleTheme = () => {
-  // alert("Test")
+const themeButton=document.querySelector(".theme-btn")
+const toggleTheme=()=>{
+  // alert('works')
   const body = document.querySelector("body")
-  const labels = document.querySelector("label")
+  const labels = document.querySelectorAll("label")
 
-  if(body.style.backgroundColor === "black"){
-    body.style.backgroundColor = "white";
-    themButton.innerHTML = "Dark Mode"
-    menuIcon.style.color = "rgb(53, 50, 50)"
-
-    for(let i = 0; i < labels.clientHeight; i++){
-      labels[i].style.color = "black"
+  if(body.style.backgroundColor==="black"){
+    body.style.backgroundColor="white"
+    themeButton.innerHTML="Dark Mode"
+    menuIcon.style.color="rgb(53, 50, 50)"
+    for (let i = 0; i < labels.length; i++) {
+      labels[i].style.color = 'black';
     }
-  } else {
-    body.style.backgroundColor = "black";
-    themButton.innerHTML = "Light Mode"
-    menuIcon.style.color = "white"
-
-    for(let i = 0; i < labels.clientHeight; i++){
-      labels[i].style.color = "white"
+  }else{
+    body.style.backgroundColor="black"
+    themeButton.innerHTML="Light Mode"
+    menuIcon.style.color="white"
+    for (let i = 0; i < labels.length; i++) {
+      labels[i].style.color = 'white';
     }
   }
+
 }
+themeButton.onclick=toggleTheme;
+
+
+// Add a new Meal
+const submitBtn = document.querySelector("#submit-btn")
+
+submitBtn.addEventListener('click', (e) => {
+  // this prevents the default so we can add a custom function to the form
+  e.preventDefault(); 
+
+  // get values from the form
+  const name = document.querySelector('input[name="name"]').value
+  const imageUrl = document.querySelector('input[name="imageUrl"]').value
+  const category = document.querySelector("#form-select").value
+  console.log(name, imageUrl, category)
+
+
+  // create a bew meal div with the form info
+  const newMeal = document.createElement("div")
+  newMeal.innerHTML = `<img src=${imageUrl} alt=${name} class="meal-image" />
+  <div class="meal-info">
+      <p>${name}</p>
+      <p class="item-category">${category}</p>
+  </div>`
+
+  const mealContainer = document.querySelector("#meals-container")
+  
+  // add the item to the beginning
+  mealContainer.insertBefore(newMeal, mealContainer.firstChild);
+
+  // reset the form fields...clear form
+  document.querySelector('input[name="name"]').value = "";
+  document.querySelector('input[name="imageUrl"]').value = "";
+  document.querySelector("#form-select").value = "";
+
+})
+
+//  

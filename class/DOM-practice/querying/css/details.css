@@ -1,0 +1,70 @@
+.buttons-container {
+    display: flex;
+    align-items: center;
+ }
+ 
+ .buttons-container a{
+     margin-right:20px;
+     color:black;
+ }
+ .buttons-container p{
+     cursor: pointer;
+ }
+ main{
+     flex-direction: column;
+ }
+ .current-meal{
+     width:80%;
+     margin:0 auto;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ .current-meal-info{
+     margin-bottom:10px;
+     display: flex;
+     justify-content: space-between;
+     width:60%;
+ }
+ .current-meal-image{
+     width:60%; 
+ }
+ .current-meal-category{
+     background-color: rgb(53, 50, 50);
+     color:white;
+     padding:8px 16px;
+     border-radius: 50px 20px 20px 50px;
+     font-size:12px;
+ }
+ #similar-meals-container{
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+     grid-auto-rows: max-content;
+     justify-content: center;
+     gap:20px;
+     padding:0 20px;
+    margin-top:20px;
+ 
+ }
+
+ #more-meals {
+    border: none;
+    background-color: transparent;
+    font-size: 16px    
+ }
+ 
+ @media (max-width:768px){
+     .buttons-container{
+         display: none;
+     }
+ 
+     .mobile-menu{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         padding:0 20px;
+         height:270px;
+         align-self:center;
+         width:100%;
+     }
+ }
